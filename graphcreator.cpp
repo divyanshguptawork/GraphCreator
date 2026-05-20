@@ -72,5 +72,30 @@ struct Graph {
             cout << endl;
         }
     }
+  void removeVertex(string label) {
+    int index = getIndex(label);
+    if (index == -1) return;
+
+    // Shift labels left
+    for (int i = index; i < vertexCount - 1; i++) {
+        vertices[i] = vertices[i + 1];
+    }
+
+    // Shift rows up
+    for (int i = index; i < vertexCount - 1; i++) {
+        for (int j = 0; j < vertexCount; j++) {
+            adjMatrix[i][j] = adjMatrix[i + 1][j];
+        }
+    }
+
+    // Shift columns left
+    for (int j = index; j < vertexCount - 1; j++) {
+        for (int i = 0; i < vertexCount; i++) {
+            adjMatrix[i][j] = adjMatrix[i][j + 1];
+        }
+    }
+    vertexCount--;
+  }
+  
 };
 
