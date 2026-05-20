@@ -37,4 +37,40 @@ struct Graph {
             cout << "Graph full (Max 20 vertices)." << endl;
         }
     }
+
+    // Add a directed, weighted edge from 'start' vertex to 'end' vertex
+    void addEdge(string start, string end, int weight) {
+        int u = getIndex(start);
+        int v = getIndex(end);
+        if (u != -1 && v != -1) {
+            adjMatrix[u][v] = weight;
+        } else {
+            cout << "Vertex not found." << endl;
+        }
+    }
+
+    // Remove an edge by resetting its matrix cell back to INF
+    void removeEdge(string start, string end) {
+        int u = getIndex(start);
+        int v = getIndex(end);
+        if (u != -1 && v != -1) {
+            adjMatrix[u][v] = INF;
+        }
+    }
+
+    // Print out the adjacency table formatting for debugging
+    void printTable() {
+        cout << "\nAdjacency Table:\n" << setw(6) << " ";
+        for (int i = 0; i < vertexCount; i++) cout << setw(6) << vertices[i];
+        cout << endl;
+        for (int i = 0; i < vertexCount; i++) {
+            cout << setw(6) << vertices[i];
+            for (int j = 0; j < vertexCount; j++) {
+                if (adjMatrix[i][j] == INF) cout << setw(6) << "INF";
+                else cout << setw(6) << adjMatrix[i][j];
+            }
+            cout << endl;
+        }
+    }
 };
+
